@@ -17,11 +17,14 @@
 package sample.ui;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import sample.ui.mvc.MessageController;
 
-@SpringBootApplication
+@Configuration
+@EnableAutoConfiguration
 public class SampleWebUiApplication {
 
 	@Bean
@@ -37,6 +40,11 @@ public class SampleWebUiApplication {
 				return messageRepository().findMessage(Long.valueOf(id));
 			}
 		};
+	}
+
+	@Bean
+	public MessageController messageController(MessageRepository messageRepository) {
+		return new MessageController(messageRepository);
 	}
 
 	public static void main(String[] args) throws Exception {
