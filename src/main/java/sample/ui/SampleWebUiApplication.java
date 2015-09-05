@@ -17,38 +17,65 @@
 package sample.ui;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration;
+import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.ServerPropertiesAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.convert.converter.Converter;
 import sample.ui.mvc.MessageController;
 
 @Configuration
-@EnableAutoConfiguration
+@Import({
+        DispatcherServletAutoConfiguration.class,
+        EmbeddedServletContainerAutoConfiguration.class,
+        ErrorMvcAutoConfiguration.class,
+        HttpEncodingAutoConfiguration.class,
+        HttpMessageConvertersAutoConfiguration.class,
+        JacksonAutoConfiguration.class,
+        JmxAutoConfiguration.class,
+        MultipartAutoConfiguration.class,
+        ServerPropertiesAutoConfiguration.class,
+        PropertyPlaceholderAutoConfiguration.class,
+        ThymeleafAutoConfiguration.class,
+        WebMvcAutoConfiguration.class,
+        WebSocketAutoConfiguration.class,
+})
 public class SampleWebUiApplication {
 
-	@Bean
-	public MessageRepository messageRepository() {
-		return new InMemoryMessageRepository();
-	}
+    @Bean
+    public MessageRepository messageRepository() {
+        return new InMemoryMessageRepository();
+    }
 
-	@Bean
-	public Converter<String, Message> messageConverter() {
-		return new Converter<String, Message>() {
-			@Override
-			public Message convert(String id) {
-				return messageRepository().findMessage(Long.valueOf(id));
-			}
-		};
-	}
+    @Bean
+    public Converter<String, Message> messageConverter() {
+        return new Converter<String, Message>() {
+            @Override
+            public Message convert(String id) {
+                return messageRepository().findMessage(Long.valueOf(id));
+            }
+        };
+    }
 
-	@Bean
-	public MessageController messageController(MessageRepository messageRepository) {
-		return new MessageController(messageRepository);
-	}
+    @Bean
+    public MessageController messageController(MessageRepository messageRepository) {
+        return new MessageController(messageRepository);
+    }
 
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleWebUiApplication.class, args);
-	}
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(SampleWebUiApplication.class, args);
+    }
 
 }
