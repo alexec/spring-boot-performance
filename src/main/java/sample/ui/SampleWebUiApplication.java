@@ -18,8 +18,6 @@ package sample.ui;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;
-import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
-import org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration;
@@ -29,7 +27,6 @@ import org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfi
 import org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ServerPropertiesAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
-import org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -43,14 +40,11 @@ import sample.ui.mvc.MessageController;
         ErrorMvcAutoConfiguration.class,
         HttpEncodingAutoConfiguration.class,
         HttpMessageConvertersAutoConfiguration.class,
-        JacksonAutoConfiguration.class,
-        JmxAutoConfiguration.class,
         MultipartAutoConfiguration.class,
         ServerPropertiesAutoConfiguration.class,
         PropertyPlaceholderAutoConfiguration.class,
         ThymeleafAutoConfiguration.class,
         WebMvcAutoConfiguration.class,
-        WebSocketAutoConfiguration.class,
 })
 public class SampleWebUiApplication {
 
